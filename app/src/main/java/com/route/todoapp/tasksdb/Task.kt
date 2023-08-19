@@ -9,6 +9,6 @@ data class Task(
     @PrimaryKey val userID: Int,
     val taskTitle: String? = null,
     val taskDescription: String? = null,
-    val taskDate: Date? = null,
+
     val isDone: Boolean? = null
 )

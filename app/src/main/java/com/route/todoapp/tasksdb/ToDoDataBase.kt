@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Task::class], version = 1)
-abstract class ToDoDataBase private constructor() : RoomDatabase(){
+abstract class ToDoDataBase : RoomDatabase(){
     abstract fun taskDao(): TaskDao
     companion object{
         private var todoDB_Instance: ToDoDataBase? = null
