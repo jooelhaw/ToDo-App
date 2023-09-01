@@ -5,4 +5,5 @@
     <color name="sp_background">#DFECDB</color>
     <color name="app_bar_color">#5D9CEC</color>
     <color name="transparent_color">#00FFFFFF</color>
+    <color name="unselected">#C8C9CB</color>
 </resources>

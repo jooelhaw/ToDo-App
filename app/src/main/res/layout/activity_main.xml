@@ -16,7 +16,6 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="157dp">
-
             <TextView
                 android:id="@+id/app_name"
                 android:layout_width="wrap_content"
@@ -28,7 +27,6 @@
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -40,16 +38,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
-        android:backgroundTint="@color/transparent_color"
-        app:fabCradleMargin="20dp"
-        app:fabCradleRoundedCornerRadius="15dp"
+        android:backgroundTint="@color/white"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="10dp"
         app:fabCradleVerticalOffset="0dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@drawable/bottom_nav_shape"
+            android:background="@color/transparent_color"
+            app:labelVisibilityMode="selected"
+            app:itemActiveIndicatorStyle="@null"
+            app:itemIconTint="@color/bottom_nav_color"
+            app:itemTextColor="@color/bottom_nav_color"
             app:menu="@menu/menu_bottom_nav" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -62,6 +64,6 @@
         app:backgroundTint="@color/white"
         app:borderWidth="4dp"
         app:layout_anchor="@id/bottom_app_bar"
-        
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         app:tint="@color/white" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
