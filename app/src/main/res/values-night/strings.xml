@@ -2,4 +2,5 @@
 <resources>
     <string name="tasks_string">Tasks</string>
     <string name="settings_string">Settings</string>
+    <string name="add_a_new_task">Add a New Task</string>
 </resources>
