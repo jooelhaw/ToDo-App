@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.google.android.material.snackbar.Snackbar
 import com.route.todoapp.databinding.ActivityMainBinding
 import com.route.todoapp.databinding.HomeContentBinding
 import com.route.todoapp.taps.AddFragment
@@ -35,6 +36,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showBottomSheet() {
         val addBottomSheet = AddFragment()
+        addBottomSheet.onTaskAdded = AddFragment.onAddedListener {
+            Snackbar.make(viewBinding.root,"Task Added Successfully",Snackbar.LENGTH_SHORT).show()
+        }
         addBottomSheet.show(supportFragmentManager,"")
     }
 

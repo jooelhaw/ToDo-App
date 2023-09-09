@@ -8,4 +8,7 @@
     <string name="settings_string">Settings</string>
     <string name="add_a_new_task">Add a New Task</string>
     <string name="task_title_hint">Task title</string>
+    <string name="task_desc_hint">Description</string>
+    <string name="task_date_hint">Date</string>
+    <string name="add_task_btn">Add Task</string>
 </resources>

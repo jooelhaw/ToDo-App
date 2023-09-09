@@ -6,7 +6,7 @@ import java.util.Date
 
 @Entity(tableName = "todo-task")
 data class Task(
-    @PrimaryKey val userID: Int,
+    @PrimaryKey(autoGenerate = true) val userID: Int? = null,
     var taskTitle: String? = null,
     var taskDescription: String? = null,
     var taskDate: Long? = null,
