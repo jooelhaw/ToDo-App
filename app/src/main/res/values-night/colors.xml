@@ -2,4 +2,5 @@
 <resources>
     <color name="unselected">#C8C9CB</color>
     <color name="text_hint">#6E6D6D</color>
+    <color name="grey_hint">#878282</color>
 </resources>

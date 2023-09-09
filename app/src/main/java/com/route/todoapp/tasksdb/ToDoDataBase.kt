@@ -12,7 +12,7 @@ abstract class ToDoDataBase : RoomDatabase(){
         private var todoDB_Instance: ToDoDataBase? = null
         fun getInstance(context: Context): ToDoDataBase{
             if (todoDB_Instance == null){
-                todoDB_Instance = Room.databaseBuilder(context,ToDoDataBase::class.java,"todo").build()
+                todoDB_Instance = Room.databaseBuilder(context,ToDoDataBase::class.java,"todo").allowMainThreadQueries().build()
             }
             return todoDB_Instance!!
         }
