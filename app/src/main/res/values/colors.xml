@@ -3,4 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="sp_background">#DFECDB</color>
+    <color name="app_bar_color">#5D9CEC</color>
+    <color name="transparent_color">#00FFFFFF</color>
+    <color name="unselected">#C8C9CB</color>
+    <color name="text_hint">#6E6D6D</color>
+    <color name="grey_hint">#878282</color>
 </resources>

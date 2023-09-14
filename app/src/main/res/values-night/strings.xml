@@ -1,13 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ToDo App</string>
-    <string name="app_title">To Do List</string>
-    <string name="tasks_tooltip">Tasks</string>
-    <string name="add_task_tooltip">Add Task</string>
-    <string name="settings_tooltip">Settings</string>
     <string name="tasks_string">Tasks</string>
     <string name="settings_string">Settings</string>
     <string name="add_a_new_task">Add a New Task</string>
-    <string name="task_title_hint">Task title</string>
     <string name="task_desc_hint">Description</string>
     <string name="task_date_hint">Date</string>
     <string name="add_task_btn">Add Task</string>
