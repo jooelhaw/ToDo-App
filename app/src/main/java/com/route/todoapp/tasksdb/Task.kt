@@ -10,5 +10,5 @@ data class Task(
     var taskTitle: String? = null,
     var taskDescription: String? = null,
     var taskDate: Long? = null,
-    var isDone: Boolean? = null
+    var isDone: Boolean? = false
 )

@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
 }
 
+
 android {
     namespace = "com.route.todoapp"
     compileSdk = 33
@@ -49,6 +50,7 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.github.prolificinteractive:material-calendarview:2.0.0")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")

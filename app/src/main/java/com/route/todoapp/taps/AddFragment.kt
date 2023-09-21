@@ -41,8 +41,8 @@ class AddFragment: BottomSheetDialogFragment() {
     private fun showCalendar() {
         context?.let {
             val dialog = DatePickerDialog(it)
-            dialog.setOnDateSetListener { datePicker, day, month, year ->
-                viewBinding.taskDateInput.setText("$day-$month-$year")
+            dialog.setOnDateSetListener { datePicker, year, month, day ->
+                viewBinding.taskDateInput.setText("$day-${month+1}-$year")
                 calendar.set(year,month,day)
                 calendar.set(Calendar.HOUR_OF_DAY,0)
                 calendar.set(Calendar.MINUTE,0)

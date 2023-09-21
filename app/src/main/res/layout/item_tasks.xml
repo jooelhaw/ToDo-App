@@ -11,23 +11,40 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/rv_task_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="9dp"
             android:text="Task Title"
             android:textColor="@color/app_bar_light"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/rv_task_title"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/rvtask_state"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="1dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/state_shape"
+            android:padding="1dp"
+            app:layout_constraintBottom_toBottomOf="@id/rv_task_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rv_task_title"
+            app:layout_constraintWidth_percent="0.03" />
 
         <ImageButton
             android:id="@+id/rv_task_donebtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:background="@drawable/done_btn_shape"
+            android:padding="5dp"
             android:src="@drawable/ic_done"
             app:layout_constraintBottom_toBottomOf="@id/rv_task_date"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,25 +53,29 @@
 
         <TextView
             android:id="@+id/rv_task_desc"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="9dp"
             android:text="Task Description"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@id/rv_task_donebtn"
+            app:layout_constraintStart_toEndOf="@id/rvtask_state"
             app:layout_constraintTop_toBottomOf="@id/rv_task_title" />
 
         <TextView
             android:id="@+id/rv_task_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="9dp"
             android:text="Task Date"
             android:textAlignment="center"
             android:textColor="@color/grey_hint"
             android:textSize="15sp"
             android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/rvtask_state"
             app:layout_constraintTop_toBottomOf="@id/rv_task_desc" />
 
 
