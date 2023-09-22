@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.route.todoapp.clearTime
 import com.route.todoapp.databinding.FragmentAddBinding
 import com.route.todoapp.tasksdb.Task
 import com.route.todoapp.tasksdb.ToDoDataBase
@@ -43,11 +44,16 @@ class AddFragment: BottomSheetDialogFragment() {
             val dialog = DatePickerDialog(it)
             dialog.setOnDateSetListener { datePicker, year, month, day ->
                 viewBinding.taskDateInput.setText("$day-${month+1}-$year")
-                calendar.set(year,month,day)
-                calendar.set(Calendar.HOUR_OF_DAY,0)
-                calendar.set(Calendar.MINUTE,0)
-                calendar.set(Calendar.SECOND,0)
-                calendar.set(Calendar.MILLISECOND,0)
+                calendar.set(Calendar.YEAR,year)
+                calendar.set(Calendar.MONTH,month)
+                calendar.set(Calendar.DAY_OF_MONTH,day)
+//                calendar.set(year,month,day)
+                calendar.clearTime()
+//                calendar.set(Calendar.HOUR,0)
+//                calendar.set(Calendar.HOUR_OF_DAY,0)
+//                calendar.set(Calendar.MINUTE,0)
+//                calendar.set(Calendar.SECOND,0)
+//                calendar.set(Calendar.MILLISECOND,0)
             }
             dialog.show()
         }

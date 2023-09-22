@@ -1,10 +1,8 @@
 package com.route.todoapp.taps.tasks
 
 import android.content.Context
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -12,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.route.todoapp.R
 import com.route.todoapp.databinding.ItemTasksBinding
 import com.route.todoapp.tasksdb.Task
+import java.text.SimpleDateFormat
 
 class TasksAdapter(var tasks: List<Task>?,val context: Context?) : Adapter<TasksAdapter.TasksViewHoler>() {
     class TasksViewHoler(val itemBinding: ItemTasksBinding) : ViewHolder(itemBinding.root){
@@ -19,11 +18,13 @@ class TasksAdapter(var tasks: List<Task>?,val context: Context?) : Adapter<Tasks
             itemBinding.rvTaskTitle.text = task.taskTitle.toString()
             itemBinding.rvTaskDesc.text = task.taskDescription.toString()
             //var done_btn : ImageButton = itemBinding.rvTaskDonebtn
-
-            itemBinding.rvTaskDate.text = task.taskDate.toString()
+            val simplaDateFormat = SimpleDateFormat("dd/MM/yy")
+            val dateString = simplaDateFormat.format(task.taskDate)
+            itemBinding.rvTaskDate.text = dateString.toString()
         }
     }
     var onButtonClick: OnButtonClickListener? = null
+    var onCardClick: OnButtonClickListener? = null
     fun interface OnButtonClickListener{
         fun onClick(position: Int, task: Task)
     }
@@ -40,6 +41,12 @@ class TasksAdapter(var tasks: List<Task>?,val context: Context?) : Adapter<Tasks
         if (onButtonClick!= null) {
             holder.itemBinding.rvTaskDonebtn.setOnClickListener {
                 onButtonClick?.onClick(position, tasks!![position])
+            }
+        }
+        if (onCardClick!= null) {
+            holder.itemBinding.cardTask.setOnLongClickListener {
+                onCardClick?.onClick(position,tasks!![position])
+                true
             }
         }
         if(tasks!![position].isDone == true) {

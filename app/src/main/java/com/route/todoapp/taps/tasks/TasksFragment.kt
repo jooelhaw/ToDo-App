@@ -1,6 +1,7 @@
 package com.route.todoapp.taps.tasks
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.route.todoapp.EditActivity
 import com.route.todoapp.R
 import com.route.todoapp.databinding.FragmentTasksBinding
 import com.route.todoapp.databinding.ItemTasksBinding
 import com.route.todoapp.tasksdb.Task
 import com.route.todoapp.tasksdb.ToDoDataBase
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class TasksFragment: Fragment() {
@@ -33,10 +36,6 @@ class TasksFragment: Fragment() {
     }
 
 
-    private fun refreshRecyclerView() {
-        adapter.notifyDataSetChanged()
-    }
-
 
     override fun onStart() {
         super.onStart()
@@ -52,10 +51,20 @@ class TasksFragment: Fragment() {
                 override fun onClick(position: Int, task: Task) {
                     task.isDone = true
                     ToDoDataBase.getInstance(it).taskDao().updateTask(task)
-                    adapter.notifyItemChanged(position)
                     Toast.makeText(it,"Done",Toast.LENGTH_SHORT).show()
-                    refreshRecyclerView()
+                    adapter.notifyItemChanged(position)
+                    adapter.notifyDataSetChanged()
 
+                }
+            }
+            adapter.onCardClick = object : TasksAdapter.OnButtonClickListener{
+                override fun onClick(position: Int, task: Task) {
+                    val intent = Intent(requireActivity(),EditActivity::class.java)
+                    intent.putExtra("TITLE",task.taskTitle)
+                    intent.putExtra("DESCRIPTION",task.taskDescription)
+                    intent.putExtra("DATE", task.taskDate.toString())
+                    intent.putExtra("STATE",task.isDone)
+                    startActivity(intent)
                 }
             }
 
