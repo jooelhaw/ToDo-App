@@ -64,6 +64,7 @@ class TasksFragment: Fragment() {
                     intent.putExtra("DESCRIPTION",task.taskDescription)
                     intent.putExtra("DATE", task.taskDate.toString())
                     intent.putExtra("STATE",task.isDone)
+                    intent.putExtra("TASK",task)
                     startActivity(intent)
                 }
             }
