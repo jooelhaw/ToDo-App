@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import com.route.todoapp.EditActivity
 import com.route.todoapp.R
+import com.route.todoapp.clearTime
 import com.route.todoapp.databinding.FragmentTasksBinding
 import com.route.todoapp.databinding.ItemTasksBinding
 import com.route.todoapp.tasksdb.Task
@@ -31,22 +33,37 @@ class TasksFragment: Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    val calendar = Calendar.getInstance()
+    init {
+        calendar.clearTime()
     }
 
+    private fun loadTasksByDate() {
+        viewBinding.calendarView.setOnDateChangedListener( OnDateSelectedListener{
+                widget, date, selected ->
+            if (selected) {
+                calendar.set(Calendar.YEAR, date.year)
+                calendar.set(Calendar.MONTH, date.month-1)
+                calendar.set(Calendar.DAY_OF_MONTH, date.day)
+                var selectedDate: Long = calendar.timeInMillis
+                loadTasks(selectedDate)
+            }
+        })
+    }
 
 
     override fun onStart() {
         super.onStart()
         initView()
-        loadTasks()
     }
 
-    fun loadTasks() {
+    fun loadTasks(date: Long?) {
         context?.let {
-            var tasksList = ToDoDataBase.getInstance(it).taskDao().getAll()
-            adapter.bindTask(tasksList)
+            if (date!=null) {
+                var tasksList = ToDoDataBase.getInstance(it).taskDao().getByDate(date)
+                adapter.bindTask(tasksList)
+            }
+            // make task done implementation
             adapter.onButtonClick = object : TasksAdapter.OnButtonClickListener{
                 override fun onClick(position: Int, task: Task) {
                     task.isDone = true
@@ -57,6 +74,7 @@ class TasksFragment: Fragment() {
 
                 }
             }
+            // edit task implementation
             adapter.onCardClick = object : TasksAdapter.OnButtonClickListener{
                 override fun onClick(position: Int, task: Task) {
                     val intent = Intent(requireActivity(),EditActivity::class.java)
@@ -69,6 +87,20 @@ class TasksFragment: Fragment() {
                 }
             }
 
+            // delete task implementation
+            adapter.onDeleteClick = object : TasksAdapter.OnButtonClickListener{
+                override fun onClick(position: Int, task: Task) {
+                    ToDoDataBase.getInstance(it).taskDao().deleteTask(task)
+                    Toast.makeText(it,"Task is Deleted Successfully",Toast.LENGTH_SHORT).show()
+                    adapter.notifyItemRemoved(position)
+                    adapter.notifyDataSetChanged()
+                    loadTasks(null)
+                }
+            }
+
+            // load tasks by date
+            loadTasksByDate()
+
         }
 
     }
@@ -77,6 +109,10 @@ class TasksFragment: Fragment() {
         adapter = TasksAdapter(null,context)
         viewBinding.recyclerTasks.adapter = adapter
         viewBinding.calendarView.setSelectedDate(CalendarDay.today())
+        calendar.set(Calendar.YEAR,CalendarDay.today().year)
+        calendar.set(Calendar.MONTH,CalendarDay.today().month-1)
+        calendar.set(Calendar.DAY_OF_MONTH,CalendarDay.today().day)
+        loadTasks(calendar.timeInMillis)
     }
 
 }

@@ -46,6 +46,7 @@ android {
 dependencies {
     val room_version = "2.5.2"
     implementation("androidx.room:room-runtime:$room_version")
+    implementation ("com.github.zerobranch:SwipeLayout:1.3.1")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.core:core-ktx:1.9.0")

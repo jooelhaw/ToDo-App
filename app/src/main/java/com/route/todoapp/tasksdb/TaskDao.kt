@@ -17,4 +17,6 @@ interface TaskDao {
     fun updateTask(task: Task)
     @Query("SELECT * FROM `todo-task`")
     fun getAll(): List<Task>
+    @Query("SELECT * FROM `todo-task` WHERE taskDate LIKE :date")
+    fun getByDate(date: Long): List<Task>
 }
