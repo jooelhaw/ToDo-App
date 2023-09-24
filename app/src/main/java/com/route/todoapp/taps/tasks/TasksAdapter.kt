@@ -17,7 +17,6 @@ class TasksAdapter(var tasks: List<Task>?,val context: Context?) : Adapter<Tasks
         fun bind(task: Task) {
             itemBinding.rvTaskTitle.text = task.taskTitle.toString()
             itemBinding.rvTaskDesc.text = task.taskDescription.toString()
-            //var done_btn : ImageButton = itemBinding.rvTaskDonebtn
             val simplaDateFormat = SimpleDateFormat("dd/MM/yy")
             val dateString = simplaDateFormat.format(task.taskDate)
             itemBinding.rvTaskDate.text = dateString.toString()
@@ -25,6 +24,7 @@ class TasksAdapter(var tasks: List<Task>?,val context: Context?) : Adapter<Tasks
     }
     var onButtonClick: OnButtonClickListener? = null
     var onCardClick: OnButtonClickListener? = null
+    var onDeleteClick: OnButtonClickListener? = null
     fun interface OnButtonClickListener{
         fun onClick(position: Int, task: Task)
     }
@@ -43,12 +43,27 @@ class TasksAdapter(var tasks: List<Task>?,val context: Context?) : Adapter<Tasks
                 onButtonClick?.onClick(position, tasks!![position])
             }
         }
+
+        // edit task
         if (onCardClick!= null) {
             holder.itemBinding.cardTask.setOnLongClickListener {
                 onCardClick?.onClick(position,tasks!![position])
                 true
             }
         }
+
+        // is task made done
+        isTaskDone(holder,position)
+
+        // delete task
+        if (onDeleteClick!= null){
+            holder.itemBinding.deleteBtn.setOnClickListener {
+                onDeleteClick?.onClick(position,tasks!![position])
+            }
+        }
+    }
+
+    private fun isTaskDone(holder: TasksViewHoler, position: Int) {
         if(tasks!![position].isDone == true) {
             holder.itemBinding.rvTaskTitle.setTextColor(
                 getColor(context!!,R.color.done_task)

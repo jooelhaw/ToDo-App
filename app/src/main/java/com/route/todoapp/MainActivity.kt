@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.route.todoapp.databinding.ActivityMainBinding
 import com.route.todoapp.taps.AddFragment
 import com.route.todoapp.taps.SettingsFragment
 import com.route.todoapp.taps.tasks.TasksFragment
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewBinding: ActivityMainBinding
@@ -33,11 +35,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    val calendar = Calendar.getInstance()
+    init {
+        calendar.clearTime()
+        calendar.set(Calendar.YEAR,CalendarDay.today().year)
+        calendar.set(Calendar.MONTH,CalendarDay.today().month-1)
+        calendar.set(Calendar.DAY_OF_MONTH,CalendarDay.today().day)
+    }
     private fun showBottomSheet() {
         val addBottomSheet = AddFragment()
         addBottomSheet.onTaskAdded = AddFragment.onAddedListener {
             Snackbar.make(viewBinding.root,"Task Added Successfully",Snackbar.LENGTH_SHORT).show()
-            tasksFragmentRef.loadTasks()
+            tasksFragmentRef.loadTasks(calendar.timeInMillis)
         }
         addBottomSheet.show(supportFragmentManager,"")
     }
