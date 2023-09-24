@@ -94,7 +94,7 @@ class TasksFragment: Fragment() {
                     Toast.makeText(it,"Task is Deleted Successfully",Toast.LENGTH_SHORT).show()
                     adapter.notifyItemRemoved(position)
                     adapter.notifyDataSetChanged()
-                    loadTasks(null)
+                    loadTasks(date)
                 }
             }
 
