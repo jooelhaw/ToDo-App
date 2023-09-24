@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import com.route.todoapp.EditActivity
+import com.route.todoapp.MainActivity
 import com.route.todoapp.R
+import com.route.todoapp.ValuesApp
 import com.route.todoapp.clearTime
 import com.route.todoapp.databinding.FragmentTasksBinding
 import com.route.todoapp.databinding.ItemTasksBinding
@@ -46,6 +48,7 @@ class TasksFragment: Fragment() {
                 calendar.set(Calendar.MONTH, date.month-1)
                 calendar.set(Calendar.DAY_OF_MONTH, date.day)
                 var selectedDate: Long = calendar.timeInMillis
+                MainActivity().calendar.timeInMillis = selectedDate
                 loadTasks(selectedDate)
             }
         })
@@ -106,13 +109,20 @@ class TasksFragment: Fragment() {
     }
 
     private fun initView() {
-        adapter = TasksAdapter(null,context)
+        adapter = TasksAdapter(null, context)
         viewBinding.recyclerTasks.adapter = adapter
         viewBinding.calendarView.setSelectedDate(CalendarDay.today())
-        calendar.set(Calendar.YEAR,CalendarDay.today().year)
-        calendar.set(Calendar.MONTH,CalendarDay.today().month-1)
-        calendar.set(Calendar.DAY_OF_MONTH,CalendarDay.today().day)
-        loadTasks(calendar.timeInMillis)
+        if (calendar.timeInMillis!= null){
+            loadTasks(calendar.timeInMillis)
+        }else {
+            selectToday()
+            loadTasks(calendar.timeInMillis)
+        }
     }
 
+    fun selectToday() {
+        calendar.set(Calendar.YEAR, CalendarDay.today().year)
+        calendar.set(Calendar.MONTH, CalendarDay.today().month - 1)
+        calendar.set(Calendar.DAY_OF_MONTH, CalendarDay.today().day)
+    }
 }
