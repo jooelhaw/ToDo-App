@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         addBottomSheet.show(supportFragmentManager,"")
     }
 
+
     private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragment).commit()
     }
