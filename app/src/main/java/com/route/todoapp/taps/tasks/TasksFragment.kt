@@ -118,6 +118,7 @@ class TasksFragment: Fragment() {
             loadTasks(calendar.timeInMillis)
         }
     }
+    // select today
 
     fun selectToday() {
         calendar.set(Calendar.YEAR, CalendarDay.today().year)
