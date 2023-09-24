@@ -12,11 +12,8 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import com.route.todoapp.EditActivity
 import com.route.todoapp.MainActivity
-import com.route.todoapp.R
-import com.route.todoapp.ValuesApp
 import com.route.todoapp.clearTime
 import com.route.todoapp.databinding.FragmentTasksBinding
-import com.route.todoapp.databinding.ItemTasksBinding
 import com.route.todoapp.tasksdb.Task
 import com.route.todoapp.tasksdb.ToDoDataBase
 import java.text.SimpleDateFormat
@@ -113,8 +110,10 @@ class TasksFragment: Fragment() {
         viewBinding.recyclerTasks.adapter = adapter
         viewBinding.calendarView.setSelectedDate(CalendarDay.today())
         if (calendar.timeInMillis!= null){
+            viewBinding.calendarView.setSelectedDate(CalendarDay.today())
             loadTasks(calendar.timeInMillis)
         }else {
+            viewBinding.calendarView.setSelectedDate(CalendarDay.today())
             selectToday()
             loadTasks(calendar.timeInMillis)
         }

@@ -46,8 +46,7 @@ class MainActivity : AppCompatActivity() {
         val addBottomSheet = AddFragment()
         addBottomSheet.onTaskAdded = AddFragment.onAddedListener {
             Snackbar.make(viewBinding.root,"Task Added Successfully",Snackbar.LENGTH_SHORT).show()
-            var titm:Long = tasksFragmentRef.calendar.timeInMillis
-            tasksFragmentRef.loadTasks(titm)
+            tasksFragmentRef.loadTasks(tasksFragmentRef.calendar.timeInMillis)
         }
         addBottomSheet.show(supportFragmentManager,"")
     }
